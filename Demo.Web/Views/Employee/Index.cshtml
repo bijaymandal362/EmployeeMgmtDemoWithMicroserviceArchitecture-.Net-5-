@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Demo.Models.ViewModel.EmployeeViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <h1 class="text-center"><i class="fas fa-list text-success" aria-hidden="true"></i> List Of Employee</h1>
+    <hr />
+
+    <div id="PlaceHolderHere"></div>
+    <div class="d-inline">
+        <button style=" position: relative; top: 35px" type="button" class="btn btn-success" data-toggle="ajax-modal" data-target="#addPosition"
+                data-url="@Url.Action("InsertPositon")">
+            Create Position
+        </button>
+        <p align="right">
+            <a asp-action="InsertEmployeeTsk" class="btn btn-primary">Create New Employee</a>
+        </p>
+    </div>
+    <table id="myTable" class="table-striped table-bordered">
+
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Employee Code
+                </th>
+                <th>
+                    Active Position
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositionName)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Edit", "UpdateEmployeeTskList", new { employeeId = item.EmployeeId }, new { @class = "btn btn-success", @style = "width:42%;" }) |
+
+                        @Html.ActionLink("Delete", "DeleteEmployeeTsk", new { employeeId = item.EmployeeId, personId = item.PersonId }, new { @class = "btn btn-danger", @style = "width:42%;", onClick = "return confirm('Do you really want to delete?')" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });</script>
+    }
+    <style>
+        .name {
+            color: red;
+            background-color: azure;
+        }
+    </style>

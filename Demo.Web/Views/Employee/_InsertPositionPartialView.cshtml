@@ -1,0 +1,36 @@
+﻿@model Demo.Models.PositionViewModel
+
+
+<div class="modal fade" id="addPosition">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addPosition">Add Position</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="InsertPosition" method="post">
+                    <div class="form-group">
+                        <label asp-for="PositionName">Position Name</label>
+                        <input asp-for="PositionName" id="fooSearch" class="form-control " autocomplete="off" placeholder="Enter Position Name" />
+                        <span asp-validation-for="PositionName" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-save="modal">Save Position</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#addPosition").removeData("validator");
+    $("#addPosition").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("#addPosition");
+ 
+</script>

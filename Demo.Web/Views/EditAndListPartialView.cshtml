@@ -1,0 +1,81 @@
+﻿
+@model Demo.Models.ViewModel.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<h4 class="name">Employee Edit</h4>
+<hr />
+<div>
+    <div>
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-offset-1 col-md-11" style=" position:relative; left:80px; top:2px;">
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="EmployeeJobHistoryId" />
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <input type="hidden" asp-for="EmployeeCode" />
+                </div>
+
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="PositionId" />
+                    <label asp-for="MiddleName" class="control-label"></label>
+                    <input asp-for="MiddleName" class="form-control" />
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    <input type="hidden" asp-for="EmployeeId" />
+                </div>
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="PersonId" />
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row col-md-offset-1 col-md-11" style=" position:relative; left:80px; top:20px;">
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="StartDate" />
+                    <input type="hidden" asp-for="EndDate" />
+                    <label asp-for="Salary" class="control-label"></label>
+                    <input asp-for="Salary" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row col-md-offset-1 col-md-11" style=" position:relative; left:80px; top:30px;">
+                <div class="col-md-4">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-outline-danger" style="left:20px">Back to List</a>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    .name {
+        color: red;
+        background-color: azure;
+    }
+</style>

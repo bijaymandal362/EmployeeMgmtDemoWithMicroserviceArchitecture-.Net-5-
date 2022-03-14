@@ -1,0 +1,154 @@
+﻿@using Demo.Models.ViewModel;
+@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "EditEmployee&AddEmployeePosition";
+}
+
+<hr />
+<h1 class="text-center"><i class="fas fa-user-edit text-success" aria-hidden="true"></i> Employee Edit</h1>
+<hr />
+<div>
+    <div>
+        <form asp-action="UpdateEmployeeTskList" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-offset-1 col-md-11" style=" position:relative; left:80px; top:2px;">
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="EmployeeJobHistoryId" />
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" autofocus class="form-control" autocomplete="off" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <input type="hidden" asp-for="EmployeeCode" />
+                </div>
+
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="PositionId" />
+                    <label asp-for="MiddleName" class="control-label"></label>
+                    <input asp-for="MiddleName" class="form-control" autocomplete="off"/>
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    <input type="hidden" asp-for="EmployeeId" />
+                </div>
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="PersonId" />
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row col-md-offset-1 col-md-11" style=" position:relative; left:80px; top:20px;">
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="StartDate" />
+                    <input type="hidden" asp-for="EndDate" />
+                    <label asp-for="Salary" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Rs</div>
+                        </div>
+                        <input asp-for="Salary" class="form-control" autocomplete="off" />
+                    </div>
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" autocomplete="off"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row col-md-offset-1 col-md-11" style="position:relative; left:80px; top:45px;">
+                <div class="col-md-4">
+                    <input type="submit" value="Update" class="btn btn-success" style="width:49%;" />
+                    <a asp-action="Index" class="btn btn-outline-danger" style="width: 49%; left: 20px;">Back to List</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+<style>
+    .name {
+        color: red;
+        background-color: azure;
+    }
+</style>
+
+
+
+<div style=" position:relative; top:70px;">
+    <hr />
+    <h1 class="text-center"><i class="fa fa-list-alt text-success" aria-hidden="true"></i> Details</h1>
+    <hr />
+
+    <div id="PlaceHolderHere"></div>
+    <button type="button" class="btn btn-outline-success" data-toggle="ajax-modal" data-target="#addPosition"
+            data-url="@Url.Action("InsertEmployeePosition")">
+        <i class="fas fa-user"></i>  Add Employee Position
+    </button>
+    @*<button type="button" data-target="#form-modal" data-toggle="modal" onclick="showInPopUp('@Url.Action("AddEmpPosition","Emp",null,Context.Request.Scheme)','Add Employee Position'" class="btn btn-outline-success"><i class="fas fa-user"></i>  Add Employee Position</button>*@
+    <br />
+    <br />
+
+    <table id="myTable" class="table-striped table-bordered">
+        <thead>
+            <tr>
+
+                <th>
+                    Position Name
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.EmployeeHistoryViewmodels)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" data-toggle="ajax-modal" style="width:95%" data-target="#addPosition"
+                                data-url="@Url.Action($"UpdateEmployeePosition/{item.EmployeeJobHistoryId}")">
+                            Update
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

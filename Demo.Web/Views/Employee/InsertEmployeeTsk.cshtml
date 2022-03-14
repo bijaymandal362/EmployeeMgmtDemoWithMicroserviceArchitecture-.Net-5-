@@ -1,0 +1,136 @@
+﻿@model Demo.Models.ViewModel.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "InsertEmployeeTsk";
+}
+
+@ViewBag.mess
+
+
+<h1 class="text-center"><i class="fas fa-user-circle text-success" aria-hidden="true"></i>  Create Employee</h1>
+<hr />
+<div class="row">
+    <div class="col-xl-12">
+        <form asp-action="InsertEmployeeTsk" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName"  autofocus class="form-control" autocomplete="off" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="MiddleName" class="control-label"></label>
+                        <input asp-for="MiddleName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="Salary" class="control-label"></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rs</div>
+                            </div>
+                            <input asp-for="Salary" class="form-control" autocomplete="off" />
+                        </div>
+
+                        <span asp-validation-for="Salary" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="PositionId" class="control-label">Position Name</label>
+
+                        <select asp-for="PositionId" class="form-control" asp-items="@(new SelectList (@ViewBag.Lst,"PositionId","PositionName"))"></select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Start Date</label>
+                        <input type="date" asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label">End Date</label>
+                        <input type="date" asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" autocomplete="off" />
+                        <input type="hidden" asp-for="EmployeeCode" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-xl-6">
+
+                    <input type="submit" value="Create" class="btn btn-success" style="width:100%;" />
+
+                </div>
+                <div class="col-xl-6">
+
+                    <a asp-action="Index" class="btn btn-danger" style="width: 100%; left: 20px;">Back to List</a>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<style>
+    .name {
+        color: red;
+        background-color: azure;
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
